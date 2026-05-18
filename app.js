@@ -178,7 +178,7 @@ function buildServices(currentLang, config) {
       <article class="reveal group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft transition duration-500 hover:-translate-y-1 hover:shadow-luxury">
         <div class="relative h-44 overflow-hidden border-b border-slate-200 bg-slate-100">
           <!-- Replace with dedicated service visual -->
-          <img src="services-image.png" alt="CKM service card visual" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+          <img src="${service.image || `services-image-${service.n}.jpg`}" alt="CKM service card visual" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
           <div class="absolute left-4 top-4 inline-flex rounded-xl border border-slate-300 bg-white/90 p-2.5">
             <i data-lucide="${service.icon}" class="h-5 w-5 text-slate-700"></i>
           </div>

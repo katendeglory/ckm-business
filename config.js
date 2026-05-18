@@ -4,15 +4,15 @@ window.CKM_CONFIG = {
     slogan: "Valoriser. Connecter. Conclure.",
     website: "https://www.ckm-business.org",
     email: "contact@ckm-business.org",
-    address: "Avenue des Investisseurs, Centre d'Affaires Premium, Kinshasa",
+    address: "Lubumbashi, République Démocratique du Congo",
     businessHours: {
       fr: "Lun - Ven : 08:00 - 18:30",
       en: "Mon - Fri: 08:00 AM - 06:30 PM"
     }
   },
   contact: {
-    phones: ["+243 000 000 001", "+243 000 000 002"],
-    whatsapp: "+243000000003"
+    phones: ["+243 97 77 01 675", "+243 97 77 01 675"],
+    whatsapp: "+243 97 77 01 675"
   },
   social: {
     facebook: "https://facebook.com/ckm",
@@ -21,7 +21,7 @@ window.CKM_CONFIG = {
   },
   stats: [
     {
-      value: 280,
+      value: 300,
       suffix: "+",
       label: {
         fr: "Actifs analysés",
@@ -29,15 +29,15 @@ window.CKM_CONFIG = {
       }
     },
     {
-      value: 92,
-      suffix: "%",
+      value: 10,
+      suffix: "+",
       label: {
-        fr: "Transactions conclues",
-        en: "Transactions closed"
+        fr: "Années d'expertise",
+        en: "Years of expertise"
       }
     },
     {
-      value: 140,
+      value: 50,
       suffix: "+",
       label: {
         fr: "Investisseurs qualifiés",
@@ -45,16 +45,17 @@ window.CKM_CONFIG = {
       }
     },
     {
-      value: 21,
-      suffix: "j",
+      value: 5,
+      suffix: "/5",
       label: {
-        fr: "Délai moyen de conclusion",
-        en: "Average closing timeline"
+        fr: "Satisfaction de nos clients",
+        en: "Client satisfaction rate"
       }
     }
   ],
   services: [
     {
+      n: 1,
       icon: "building-2",
       title: {
         fr: "Vente d'actifs immobiliers et miniers",
@@ -66,6 +67,7 @@ window.CKM_CONFIG = {
       }
     },
     {
+      n: 2,
       icon: "gem",
       title: {
         fr: "Collecte et valorisation",
@@ -77,6 +79,7 @@ window.CKM_CONFIG = {
       }
     },
     {
+      n: 3,
       icon: "users",
       title: {
         fr: "Réseau d'acheteurs qualifiés",
@@ -88,6 +91,7 @@ window.CKM_CONFIG = {
       }
     },
     {
+      n: 4,
       icon: "handshake",
       title: {
         fr: "Mise en relation et facilitation",
