@@ -1,0 +1,13 @@
+{
+  "name": "ckm",
+  "version": "1.0.0",
+  "description": "CKM - Pure HTML/JS/CSS",
+  "scripts": {
+    "dev": "serve . -p 8080",
+    "git:push": "git add . && git commit -am \"Yet another commit\" && git push origin main"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
+

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CKM | Valoriser. Connecter. Conclure.</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta
+      name="description"
+      content="CKM accompagne la vente et la mise en relation entre actifs immobiliers, miniers et investisseurs qualifies pour des transactions fiables et concretes."
+    />
+    <meta
+      name="keywords"
+      content="CKM, immobilier, actifs miniers, investissement, mise en relation, transactions, agence premium"
+    />
+    <meta name="author" content="CKM" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CKM | Valoriser. Connecter. Conclure." />
+    <meta
+      property="og:description"
+      content="Votre passerelle vers des transactions reussies dans l'immobilier et les actifs miniers."
+    />
+    <meta property="og:image" content="hero-image.png" />
+    <meta property="og:url" content="https://www.ckm.example" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CKM | Valoriser. Connecter. Conclure." />
+    <meta
+      name="twitter:description"
+      content="Agence specialisee dans la vente et la mise en relation entre actifs et acheteurs qualifies."
+    />
+    <meta name="twitter:image" content="hero-image.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+              display: ["Playfair Display", "serif"]
+            },
+            colors: {
+              ink: "#0f172a",
+              platinum: "#f8fafc",
+              slateglass: "rgba(15, 23, 42, 0.06)"
+            },
+            boxShadow: {
+              luxury: "0 20px 80px -35px rgba(15, 23, 42, 0.35)",
+              soft: "0 10px 35px -18px rgba(15, 23, 42, 0.2)"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root {
+        --blur-glass: blur(14px);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: radial-gradient(
+            circle at 10% 10%,
+            rgba(15, 23, 42, 0.04),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at 90% 15%,
+            rgba(15, 23, 42, 0.03),
+            transparent 45%
+          ),
+          #fff;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: var(--blur-glass);
+        -webkit-backdrop-filter: var(--blur-glass);
+        border: 1px solid rgba(255, 255, 255, 0.65);
+      }
+
+      .grid-lines {
+        background-image: linear-gradient(
+            to right,
+            rgba(15, 23, 42, 0.04) 1px,
+            transparent 1px
+          ),
+          linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .progress-bar {
+        transform-origin: left center;
+      }
+
+      .pointer-glow {
+        position: fixed;
+        width: 210px;
+        height: 210px;
+        border-radius: 999px;
+        pointer-events: none;
+        z-index: 10;
+        background: radial-gradient(
+          circle,
+          rgba(15, 23, 42, 0.15) 0%,
+          rgba(15, 23, 42, 0) 72%
+        );
+        mix-blend-mode: multiply;
+        transition: transform 0.12s linear;
+      }
+
+      .section-divider {
+        width: min(100%, 1380px);
+        height: 1px;
+        margin: 0 auto;
+        background: linear-gradient(
+          90deg,
+          rgba(15, 23, 42, 0),
+          rgba(15, 23, 42, 0.18),
+          rgba(15, 23, 42, 0)
+        );
+      }
+
+      .contact-panel {
+        opacity: 0;
+        transform: translateY(14px) scale(0.96);
+        transform-origin: bottom right;
+        pointer-events: none;
+        transition: opacity 260ms ease, transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .contact-panel.is-open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .contact-panel-link {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+
+      .contact-panel.is-open .contact-panel-link {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+
+        .pointer-glow {
+          display: none;
+        }
+
+        .contact-panel,
+        .contact-panel-link {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans text-ink antialiased">
+    <div
+      id="loading-screen"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-white transition-opacity duration-700"
+      aria-live="polite"
+      aria-label="Loading interface"
+    >
+      <div class="flex flex-col items-center gap-5">
+        <div class="h-14 w-14 animate-spin rounded-full border-2 border-slate-200 border-t-slate-800"></div>
+        <p class="text-xs uppercase tracking-[0.35em]" data-i18n="loading">
+          Chargement de l'experience CKM
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="scroll-progress"
+      class="progress-bar fixed left-0 top-0 z-[90] h-[3px] w-full bg-gradient-to-r from-slate-900 via-slate-700 to-slate-500"
+      style="transform: scaleX(0)"
+      aria-hidden="true"
+    ></div>
+
+    <div id="pointer-glow" class="pointer-glow hidden lg:block" aria-hidden="true"></div>
+
+    <header class="fixed inset-x-0 top-0 z-50 mx-auto w-full px-4 py-4 sm:px-8">
+      <nav
+        class="glass-panel mx-auto flex w-full max-w-7xl items-center justify-between rounded-2xl px-4 py-3 shadow-soft sm:px-6"
+        aria-label="Main navigation"
+      >
+        <a href="#hero" class="group inline-flex items-center gap-2">
+          <span class="text-lg font-semibold tracking-[0.35em]">CKM</span>
+          <span class="h-2 w-2 rounded-full bg-slate-700 transition-transform group-hover:scale-125"></span>
+        </a>
+        <button
+          id="mobile-menu-btn"
+          class="inline-flex rounded-xl border border-slate-200 p-2 text-slate-800 lg:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+        <div class="hidden items-center gap-6 lg:flex">
+          <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#about" data-i18n="nav.about">A propos</a>
+          <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#services" data-i18n="nav.services">Services</a>
+          <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#method" data-i18n="nav.method">Methode</a>
+          <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#contact" data-i18n="nav.contact">Contact</a>
+          <div class="inline-flex rounded-xl border border-slate-200 p-1">
+            <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="fr">FR</button>
+            <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="en">EN</button>
+          </div>
+          <a
+            href="#cta"
+            class="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-soft transition hover:bg-slate-800"
+            data-i18n="nav.cta"
+          >
+            Lancer une discussion
+          </a>
+        </div>
+      </nav>
+      <div
+        id="mobile-menu"
+        class="glass-panel mx-auto mt-3 hidden w-full max-w-7xl rounded-2xl p-4 shadow-soft lg:hidden"
+      >
+        <div class="flex flex-col gap-3">
+          <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#about" data-i18n="nav.about">A propos</a>
+          <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#services" data-i18n="nav.services">Services</a>
+          <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#method" data-i18n="nav.method">Methode</a>
+          <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#contact" data-i18n="nav.contact">Contact</a>
+          <div class="inline-flex w-max rounded-xl border border-slate-200 p-1">
+            <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="fr">FR</button>
+            <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="en">EN</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="overflow-hidden">
+      <section id="hero" class="relative grid-lines overflow-hidden px-4 pt-36 sm:px-8 lg:pt-44">
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute -left-20 top-10 h-72 w-72 rounded-full bg-slate-100 blur-3xl"></div>
+          <div class="absolute -right-16 top-20 h-72 w-72 rounded-full bg-slate-100 blur-3xl"></div>
+        </div>
+        <div class="relative mx-auto grid w-full max-w-7xl gap-12 pb-24 lg:grid-cols-2 lg:items-end">
+          <div class="reveal space-y-7">
+            <p class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-medium uppercase tracking-[0.22em]">
+              <span class="h-1.5 w-1.5 rounded-full bg-slate-600"></span>
+              <span data-i18n="hero.badge">Agence de vente et achats d'actifs</span>
+            </p>
+            <h1
+              class="font-display text-5xl leading-tight text-slate-950 sm:text-6xl md:text-7xl"
+              data-i18n="hero.title"
+            >
+              Valoriser. Connecter. Conclure.
+            </h1>
+            <p class="max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg" data-i18n="hero.description">
+              CKM aligne proprietaires et investisseurs qualifies autour d'actifs immobiliers et miniers a fort potentiel.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#services"
+                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-soft transition duration-300 hover:bg-slate-800"
+              >
+                <span data-i18n="hero.ctaPrimary">Decouvrir nos services</span>
+                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </a>
+              <a
+                href="#contact"
+                class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-900 hover:text-slate-900"
+              >
+                <span data-i18n="hero.ctaSecondary">Parler a un conseiller</span>
+                <i data-lucide="phone-call" class="h-4 w-4"></i>
+              </a>
+            </div>
+          </div>
+          <div class="reveal relative">
+            <div class="glass-panel relative overflow-hidden rounded-3xl p-4 shadow-luxury">
+              <!-- Replace with final premium hero visual -->
+              <img
+                src="hero-image.png"
+                alt="CKM hero visual"
+                class="h-[450px] w-full rounded-2xl object-cover"
+                loading="lazy"
+              />
+              <div class="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/60 bg-white/80 p-4 backdrop-blur">
+                <p class="text-xs uppercase tracking-[0.22em] text-slate-500" data-i18n="hero.cardLabel">Execution guidee</p>
+                <p class="mt-1 text-sm font-semibold text-slate-900" data-i18n="hero.cardText">
+                  Un accompagnement structure de l'evaluation de l'actif jusqu'a la conclusion.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section id="about" class="px-4 py-20 sm:px-8 lg:py-28">
+        <div class="mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+          <div class="reveal">
+            <p class="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-slate-700" data-i18n="about.eyebrow">
+              Positionnement
+            </p>
+            <h2 class="font-display text-4xl leading-tight text-slate-950 sm:text-5xl" data-i18n="about.title">
+              Une passerelle de confiance entre actifs strategiques et capital qualifie.
+            </h2>
+            <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600" data-i18n="about.description">
+              CKM accompagne les proprietaires qui souhaitent ceder leurs biens et les investisseurs en recherche d'opportunites fiables.
+            </p>
+          </div>
+          <div class="reveal">
+            <div class="relative overflow-hidden rounded-3xl shadow-luxury">
+              <!-- Replace with final premium about visual -->
+              <img src="about-image.png" alt="Equipe CKM en conseil" class="h-[420px] w-full object-cover" loading="lazy" />
+              <div class="glass-panel absolute bottom-5 left-5 rounded-xl px-4 py-3">
+                <p class="text-xs uppercase tracking-[0.2em] text-slate-500" data-i18n="about.overlayLabel">Vision</p>
+                <p class="text-sm font-semibold text-slate-900" data-i18n="about.overlayText">
+                  Transformer des actifs en transactions concretes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section id="services" class="px-4 py-20 sm:px-8 lg:py-28">
+        <div class="mx-auto w-full max-w-7xl">
+          <div class="reveal mb-12 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-700" data-i18n="services.eyebrow">Expertise</p>
+              <h2 class="mt-3 font-display text-4xl text-slate-950 sm:text-5xl" data-i18n="services.title">Des services concus pour conclure vite et bien.</h2>
+            </div>
+            <p class="max-w-xl text-sm text-slate-600" data-i18n="services.description">
+              Une execution premium alliant strategie, reseau qualifie et accompagnement transactionnel.
+            </p>
+          </div>
+          <div id="services-grid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-4"></div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section id="method" class="px-4 py-20 sm:px-8 lg:py-28">
+        <div class="mx-auto w-full max-w-7xl">
+          <div class="reveal mb-14">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-700" data-i18n="method.eyebrow">Execution</p>
+            <h2 class="mt-3 font-display text-4xl text-slate-950 sm:text-5xl" data-i18n="method.title">
+              Une methode rigoureuse de l'analyse a la conclusion.
+            </h2>
+          </div>
+          <div id="method-timeline" class="grid gap-6 md:grid-cols-2 xl:grid-cols-5"></div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section id="stats" class="px-4 py-20 sm:px-8 lg:py-28">
+        <div class="mx-auto w-full max-w-7xl">
+          <div class="reveal mb-10">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-700" data-i18n="stats.eyebrow">Impact</p>
+            <h2 class="mt-3 font-display text-4xl text-slate-950 sm:text-5xl" data-i18n="stats.title">Des indicateurs qui renforcent la confiance.</h2>
+          </div>
+          <div id="stats-grid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-4"></div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section id="why" class="px-4 py-20 sm:px-8 lg:py-28">
+        <div class="mx-auto w-full max-w-7xl">
+          <div class="reveal mb-12">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-700" data-i18n="why.eyebrow">Avantage CKM</p>
+            <h2 class="mt-3 font-display text-4xl text-slate-950 sm:text-5xl" data-i18n="why.title">
+              Pourquoi les investisseurs et proprietaires nous choisissent.
+            </h2>
+          </div>
+          <div id="why-grid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-4"></div>
+        </div>
+      </section>
+
+      <section id="cta" class="px-4 pb-20 pt-8 sm:px-8 lg:pb-28">
+        <div class="mx-auto w-full max-w-7xl reveal">
+          <div class="relative overflow-hidden rounded-3xl bg-slate-950 px-8 py-14 text-white shadow-luxury sm:px-12">
+            <div class="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-slate-400/20 blur-3xl"></div>
+            <div class="absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-slate-300/20 blur-3xl"></div>
+            <div class="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div class="max-w-3xl">
+                <p class="text-xs uppercase tracking-[0.25em] text-slate-300" data-i18n="cta.eyebrow">Partenariat</p>
+                <h2 class="mt-4 font-display text-4xl leading-tight sm:text-5xl" data-i18n="cta.title">
+                  CKM, votre passerelle vers des transactions reussies.
+                </h2>
+                <p class="mt-5 text-sm text-slate-300 sm:text-base" data-i18n="cta.description">
+                  Echangez avec notre equipe pour structurer la meilleure trajectoire de cession ou d'acquisition.
+                </p>
+              </div>
+              <a
+                href="#contact"
+                class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+              >
+                <span data-i18n="cta.button">Demarrer maintenant</span>
+                <i data-lucide="move-right" class="h-4 w-4"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="border-t border-slate-200 px-4 py-12 sm:px-8">
+      <div class="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.2fr_1fr_1fr]">
+        <div>
+          <h3 class="font-display text-3xl text-slate-950">CKM</h3>
+          <p class="mt-3 max-w-md text-sm text-slate-600" data-i18n="footer.description">
+            Agence specialisee en vente et mise en relation d'actifs immobiliers et miniers.
+          </p>
+          <p class="mt-6 text-xs uppercase tracking-[0.22em] text-slate-500" data-i18n="footer.slogan">
+            Valoriser. Connecter. Conclure.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500" data-i18n="footer.contact">Contact</h4>
+          <ul id="footer-contact-list" class="mt-4 space-y-2 text-sm text-slate-700"></ul>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500" data-i18n="footer.follow">Suivez-nous</h4>
+          <ul id="footer-social-list" class="mt-4 space-y-2 text-sm text-slate-700"></ul>
+        </div>
+      </div>
+      <div class="mx-auto mt-10 flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-6">
+        <p class="text-xs text-slate-500">
+          <span data-i18n="footer.rightsPrefix">Tous droits reserves</span>
+          <span id="footer-year"></span>
+          CKM.
+        </p>
+        <p id="footer-hours" class="text-xs text-slate-500"></p>
+      </div>
+      <div class="mx-auto mt-4 w-full max-w-7xl">
+        <p class="text-center text-xs text-slate-500">
+          Designed by Glory K -
+          <a
+            href="https://glorykatende.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-slate-700 transition hover:text-slate-900"
+          >
+            glorykatende.com
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50 w-max">
+      <div
+        id="contact-panel"
+        class="contact-panel absolute bottom-full right-0 mb-3 w-64 rounded-2xl border border-slate-200 bg-white p-4 shadow-luxury"
+        aria-hidden="true"
+      >
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500" data-i18n="contact.quick">Acces rapide</p>
+        <div id="floating-contact-links" class="space-y-2"></div>
+      </div>
+      <button
+        id="floating-contact-btn"
+        class="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-luxury transition hover:bg-slate-800"
+        aria-expanded="false"
+      >
+        <i data-lucide="messages-square" class="h-4 w-4 transition group-hover:rotate-3"></i>
+        <span data-i18n="contact.button">Nous Contacter</span>
+      </button>
+    </div>
+
+    <script type="application/ld+json" id="schema-org"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="./config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
