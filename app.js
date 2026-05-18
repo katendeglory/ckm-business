@@ -71,45 +71,45 @@ const CKM_TRANSLATIONS = {
     }
   },
   en: {
-    loading: "Loading CKM experience",
+    loading: "Loading the CKM experience",
     nav: {
       about: "About",
       services: "Services",
       method: "Method",
       contact: "Contact",
-      cta: "Start a conversation"
+      cta: "Start a discussion"
     },
     hero: {
-      badge: "Premium asset connection agency",
-      title: "Enhance. Connect. Close.",
+      badge: "Asset sales and acquisition agency",
+      title: "Value. Connect. Close.",
       description:
-        "CKM is a specialized agency for sales and introductions between real-estate, mining assets, and high-potential buyers.",
+        "CKM is a specialized agency in the sale and matchmaking of real estate and mining assets with qualified prospective buyers.",
       ctaPrimary: "Explore our services",
-      ctaSecondary: "Talk to an advisor",
+      ctaSecondary: "Speak with an advisor",
       cardLabel: "Guided execution",
-      cardText: "Structured support from asset review to final closing."
+      cardText: "Structured support from asset valuation through to closing."
     },
     about: {
       eyebrow: "Positioning",
       title: "A trusted bridge between strategic assets and qualified capital.",
       description:
-        "We support owners willing to sell and investors seeking reliable, concrete opportunities.",
+        "We support owners looking to sell their assets, as well as investors seeking reliable, concrete opportunities.",
       overlayLabel: "Vision",
       overlayText: "Turn assets into concrete transactions."
     },
     services: {
       eyebrow: "Expertise",
-      title: "Services designed to close efficiently and confidently.",
-      description: "Premium execution combining strategy, qualified networks, and transaction guidance.",
-      cardCta: "Contact Us"
+      title: "Services designed to close quickly and successfully.",
+      description: "Premium execution combining strategy, a qualified network, and transaction support.",
+      cardCta: "Contact us"
     },
     method: {
       eyebrow: "Execution",
-      title: "A rigorous method from analysis to closing."
+      title: "A rigorous method from analysis through to closing."
     },
     stats: {
       eyebrow: "Impact",
-      title: "Metrics that reinforce confidence."
+      title: "Indicators that build confidence."
     },
     why: {
       eyebrow: "CKM Advantage",
@@ -119,18 +119,18 @@ const CKM_TRANSLATIONS = {
       eyebrow: "Partnership",
       title: "CKM, your gateway to successful transactions.",
       description:
-        "Our role is clear: help you sell assets efficiently by connecting them to the right buyers.",
+        "Our role is clear: help you sell your assets efficiently by connecting them with the right buyers.",
       button: "Get started now"
     },
     footer: {
-      description: "Agency specialized in selling and matching real-estate and mining assets.",
-      slogan: "Enhance. Connect. Close.",
+      description: "Agency specialized in the sale and matchmaking of real estate and mining assets.",
+      slogan: "Value. Connect. Close.",
       contact: "Contact",
       follow: "Follow us",
       rightsPrefix: "All rights reserved"
     },
     contact: {
-      button: "Contact Us",
+      button: "Contact us",
       quick: "Quick access",
       whatsapp: "WhatsApp",
       call: "Call",
@@ -333,11 +333,11 @@ function updateSchema(currentLang, config) {
     "@type": "Organization",
     name: config.company.name,
     url: config.company.website,
-    slogan: currentLang === "fr" ? config.company.slogan : "Enhance. Connect. Close.",
+    slogan: currentLang === "fr" ? config.company.slogan : "Value. Connect. Close.",
     description:
       currentLang === "fr"
         ? "Agence spécialisée dans la vente et la mise en relation entre actifs immobiliers, miniers et acheteurs qualifiés."
-        : "Agency specialized in the sale and introduction of real-estate and mining assets to qualified buyers.",
+        : "Agency specialized in the sale and matchmaking of real estate and mining assets with qualified buyers.",
     email: config.company.email,
     telephone: config.contact.phones[0],
     address: {

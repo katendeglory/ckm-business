@@ -49,7 +49,7 @@ window.CKM_CONFIG = {
       suffix: "/5",
       label: {
         fr: "Satisfaction de nos clients",
-        en: "Client satisfaction rate"
+        en: "Client satisfaction"
       }
     }
   ],
@@ -59,11 +59,11 @@ window.CKM_CONFIG = {
       icon: "building-2",
       title: {
         fr: "Vente d'actifs immobiliers et miniers",
-        en: "Sale of real-estate and mining assets"
+        en: "Sale of real estate and mining assets"
       },
       description: {
         fr: "Commercialisation structurée avec positionnement premium pour accélérer la cession.",
-        en: "Structured commercialization with premium positioning to accelerate disposition."
+        en: "Structured marketing with premium positioning to accelerate the sale."
       }
     },
     {
@@ -71,7 +71,7 @@ window.CKM_CONFIG = {
       icon: "gem",
       title: {
         fr: "Collecte et valorisation",
-        en: "Asset collection and valuation"
+        en: "Asset sourcing and valuation"
       },
       description: {
         fr: "Qualification technique et stratégique pour présenter des opportunités crédibles.",
@@ -95,11 +95,11 @@ window.CKM_CONFIG = {
       icon: "handshake",
       title: {
         fr: "Mise en relation et facilitation",
-        en: "Introductions and deal facilitation"
+        en: "Matchmaking and transaction facilitation"
       },
       description: {
         fr: "Encadrement des échanges pour fluidifier la négociation et sécuriser la conclusion.",
-        en: "Guided interactions to streamline negotiation and secure closing."
+        en: "Structured support for discussions to streamline negotiation and secure closing."
       }
     }
   ],
@@ -112,7 +112,7 @@ window.CKM_CONFIG = {
       },
       description: {
         fr: "Lecture complète du potentiel, des enjeux et du contexte de cession.",
-        en: "Full review of potential, context, and transaction constraints."
+        en: "Comprehensive review of potential, key considerations, and divestiture context."
       }
     },
     {
@@ -145,7 +145,7 @@ window.CKM_CONFIG = {
       },
       description: {
         fr: "Diffusion contrôlée vers des acquéreurs qualifiés et décisionnaires.",
-        en: "Controlled outreach to qualified, decision-making buyers."
+        en: "Controlled outreach to qualified buyers and decision-makers."
       }
     },
     {
@@ -156,7 +156,7 @@ window.CKM_CONFIG = {
       },
       description: {
         fr: "Suivi jusqu'à l'accord final avec discipline et transparence.",
-        en: "Oversight through final agreement with rigor and transparency."
+        en: "Support through to the final agreement with discipline and transparency."
       }
     }
   ],
@@ -191,7 +191,7 @@ window.CKM_CONFIG = {
       },
       description: {
         fr: "Valorisation orientée performance pour optimiser l'attractivité de l'actif.",
-        en: "Performance-driven valuation to optimize market attractiveness."
+        en: "Performance-driven valuation to optimize asset attractiveness."
       }
     },
     {
