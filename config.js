@@ -2,17 +2,17 @@ window.CKM_CONFIG = {
   company: {
     name: "CKM",
     slogan: "Valoriser. Connecter. Conclure.",
-    website: "https://www.ckm.example",
-    email: "contact@ckm.example",
-    address: "Lubumbashi, Republique Democratique du Congo",
+    website: "https://www.ckm-business.org",
+    email: "contact@ckm-business.org",
+    address: "Avenue des Investisseurs, Centre d'Affaires Premium, Kinshasa",
     businessHours: {
       fr: "Lun - Ven : 08:00 - 18:30",
       en: "Mon - Fri: 08:00 AM - 06:30 PM"
     }
   },
   contact: {
-    phones: ["+243 97 77 01 675", "+243 97 77 01 675"],
-    whatsapp: "+243 97 77 01 675"
+    phones: ["+243 000 000 001", "+243 000 000 002"],
+    whatsapp: "+243000000003"
   },
   social: {
     facebook: "https://facebook.com/ckm",
@@ -21,84 +21,80 @@ window.CKM_CONFIG = {
   },
   stats: [
     {
-      value: 300,
+      value: 280,
       suffix: "+",
       label: {
-        fr: "Actifs analyses",
+        fr: "Actifs analysés",
         en: "Assets assessed"
       }
     },
     {
-      value: 10,
-      suffix: "+",
+      value: 92,
+      suffix: "%",
       label: {
-        fr: "Anneés d'expertise",
-        en: "Years of expertise"
+        fr: "Transactions conclues",
+        en: "Transactions closed"
       }
     },
     {
-      value: 50,
+      value: 140,
       suffix: "+",
       label: {
-        fr: "Investisseurs qualifies",
+        fr: "Investisseurs qualifiés",
         en: "Qualified investors"
       }
     },
     {
-      value: "5",
-      suffix: "/5",
+      value: 21,
+      suffix: "j",
       label: {
-        fr: "Satisfaction de nos clients",
-        en: "Client rate of satisfaction"
+        fr: "Délai moyen de conclusion",
+        en: "Average closing timeline"
       }
     }
   ],
   services: [
     {
-      n: 1,
       icon: "building-2",
       title: {
         fr: "Vente d'actifs immobiliers et miniers",
         en: "Sale of real-estate and mining assets"
       },
       description: {
-        fr: "Commercialisation structuree avec positionnement premium pour accelerer la cession.",
+        fr: "Commercialisation structurée avec positionnement premium pour accélérer la cession.",
         en: "Structured commercialization with premium positioning to accelerate disposition."
       }
     },
     {
-      n: 2,
       icon: "gem",
       title: {
         fr: "Collecte et valorisation",
         en: "Asset collection and valuation"
       },
       description: {
-        fr: "Qualification technique et strategique pour presenter des opportunites credibles.",
+        fr: "Qualification technique et stratégique pour présenter des opportunités crédibles.",
         en: "Technical and strategic qualification to present credible opportunities."
       }
     },
     {
-      n: 3,
       icon: "users",
       title: {
-        fr: "Reseau d'acheteurs qualifies",
+        fr: "Réseau d'acheteurs qualifiés",
         en: "Qualified buyer network"
       },
       description: {
-        fr: "Activation d'un ecosysteme d'investisseurs cibles selon le profil de l'actif.",
+        fr: "Activation d'un écosystème d'investisseurs ciblés selon le profil de l'actif.",
         en: "Activation of a targeted investor ecosystem based on each asset profile."
       }
     },
     {
-      n: 4,
       icon: "handshake",
       title: {
         fr: "Mise en relation et facilitation",
         en: "Introductions and deal facilitation"
       },
       description: {
-        fr: "Encadrement des echanges pour fluidifier la negociation et securiser la conclusion.",
+        fr: "Encadrement des échanges pour fluidifier la négociation et sécuriser la conclusion.",
         en: "Guided interactions to streamline negotiation and secure closing."
       }
     }
@@ -111,7 +107,7 @@ window.CKM_CONFIG = {
         en: "Asset identification"
       },
       description: {
-        fr: "Lecture complete du potentiel, des enjeux et du contexte de cession.",
+        fr: "Lecture complète du potentiel, des enjeux et du contexte de cession.",
         en: "Full review of potential, context, and transaction constraints."
       }
     },
@@ -122,14 +118,14 @@ window.CKM_CONFIG = {
         en: "Offer structuring"
       },
       description: {
-        fr: "Formalisation d'une proposition claire, competitive et investissable.",
+        fr: "Formalisation d'une proposition claire, compétitive et investissable.",
         en: "Formalization of a clear, competitive, investment-ready offer."
       }
     },
     {
       icon: "database",
       title: {
-        fr: "Integration en base",
+        fr: "Intégration en base",
         en: "Database integration"
       },
       description: {
@@ -140,22 +136,22 @@ window.CKM_CONFIG = {
     {
       icon: "radio-tower",
       title: {
-        fr: "Activation du reseau",
+        fr: "Activation du réseau",
         en: "Network activation"
       },
       description: {
-        fr: "Diffusion controlee vers des acquereurs qualifies et decisionnaires.",
+        fr: "Diffusion contrôlée vers des acquéreurs qualifiés et décisionnaires.",
         en: "Controlled outreach to qualified, decision-making buyers."
       }
     },
     {
       icon: "badge-check",
       title: {
-        fr: "Conclusion accompagnee",
+        fr: "Conclusion accompagnée",
         en: "Guided closing"
       },
       description: {
-        fr: "Suivi jusqu'a l'accord final avec discipline et transparence.",
+        fr: "Suivi jusqu'à l'accord final avec discipline et transparence.",
         en: "Oversight through final agreement with rigor and transparency."
       }
     }
@@ -164,7 +160,7 @@ window.CKM_CONFIG = {
     {
       icon: "shield-check",
       title: {
-        fr: "Fiabilite transactionnelle",
+        fr: "Fiabilité transactionnelle",
         en: "Transactional reliability"
       },
       description: {
@@ -175,33 +171,33 @@ window.CKM_CONFIG = {
     {
       icon: "network",
       title: {
-        fr: "Reseau premium actif",
+        fr: "Réseau premium actif",
         en: "Active premium network"
       },
       description: {
-        fr: "Acces direct a des investisseurs qualifies sur des cycles courts.",
+        fr: "Accès direct à des investisseurs qualifiés sur des cycles courts.",
         en: "Direct access to qualified investors in short execution cycles."
       }
     },
     {
       icon: "line-chart",
       title: {
-        fr: "Positionnement strategique",
+        fr: "Positionnement stratégique",
         en: "Strategic positioning"
       },
       description: {
-        fr: "Valorisation orientee performance pour optimiser l'attractivite de l'actif.",
+        fr: "Valorisation orientée performance pour optimiser l'attractivité de l'actif.",
         en: "Performance-driven valuation to optimize market attractiveness."
       }
     },
     {
       icon: "sparkles",
       title: {
-        fr: "Experience premium",
+        fr: "Expérience premium",
         en: "Premium experience"
       },
       description: {
-        fr: "Accompagnement humain, discret et professionnel a chaque etape.",
+        fr: "Accompagnement humain, discret et professionnel à chaque étape.",
         en: "Human, discreet, and professional guidance at every step."
       }
     }

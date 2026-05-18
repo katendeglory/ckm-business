@@ -1,10 +1,10 @@
 const CKM_TRANSLATIONS = {
   fr: {
-    loading: "Chargement de l'experience CKM",
+    loading: "Chargement de l'expérience CKM",
     nav: {
-      about: "A propos",
+      about: "À propos",
       services: "Services",
-      method: "Methode",
+      method: "Méthode",
       contact: "Contact",
       cta: "Lancer une discussion"
     },
@@ -12,29 +12,29 @@ const CKM_TRANSLATIONS = {
       badge: "Agence de vente et achats d'actifs",
       title: "Valoriser. Connecter. Conclure.",
       description:
-        "CKM est une agence specialisee dans la vente et la mise en relation entre les actifs immobiliers, miniers et les potentiels acheteurs.",
-      ctaPrimary: "Decouvrir nos services",
-      ctaSecondary: "Parler a un conseiller",
-      cardLabel: "Execution guidee",
-      cardText: "Un accompagnement structure de l'evaluation de l'actif jusqu'a la conclusion."
+        "CKM est une agence spécialisée dans la vente et la mise en relation entre les actifs immobiliers, miniers et les potentiels acheteurs.",
+      ctaPrimary: "Découvrir nos services",
+      ctaSecondary: "Parler à un conseiller",
+      cardLabel: "Exécution guidée",
+      cardText: "Un accompagnement structuré de l'évaluation de l'actif jusqu'à la conclusion."
     },
     about: {
       eyebrow: "Positionnement",
-      title: "Une passerelle de confiance entre actifs strategiques et capital qualifie.",
+      title: "Une passerelle de confiance entre actifs stratégiques et capital qualifié.",
       description:
-        "Nous accompagnons les proprietaires qui souhaitent ceder leurs biens, ainsi que les investisseurs a la recherche d'opportunites fiables et concretes.",
+        "Nous accompagnons les propriétaires qui souhaitent céder leurs biens, ainsi que les investisseurs à la recherche d'opportunités fiables et concrètes.",
       overlayLabel: "Vision",
-      overlayText: "Transformer des actifs en transactions concretes."
+      overlayText: "Transformer des actifs en transactions concrètes."
     },
     services: {
       eyebrow: "Expertise",
-      title: "Des services concus pour conclure vite et bien.",
-      description: "Une execution premium alliant strategie, reseau qualifie et accompagnement transactionnel.",
+      title: "Des services conçus pour conclure vite et bien.",
+      description: "Une exécution premium alliant stratégie, réseau qualifié et accompagnement transactionnel.",
       cardCta: "Nous contacter"
     },
     method: {
-      eyebrow: "Execution",
-      title: "Une methode rigoureuse de l'analyse a la conclusion."
+      eyebrow: "Exécution",
+      title: "Une méthode rigoureuse de l'analyse à la conclusion."
     },
     stats: {
       eyebrow: "Impact",
@@ -42,26 +42,26 @@ const CKM_TRANSLATIONS = {
     },
     why: {
       eyebrow: "Avantage CKM",
-      title: "Pourquoi les investisseurs et proprietaires nous choisissent."
+      title: "Pourquoi les investisseurs et propriétaires nous choisissent."
     },
     cta: {
       eyebrow: "Partenariat",
-      title: "CKM, votre passerelle vers des transactions reussies.",
+      title: "CKM, votre passerelle vers des transactions réussies.",
       description:
-        "Notre role est clair : vous aider a vendre efficacement vos actifs en les connectant aux bons acheteurs.",
-      button: "Demarrer maintenant"
+        "Notre rôle est clair : vous aider à vendre efficacement vos actifs en les connectant aux bons acheteurs.",
+      button: "Démarrer maintenant"
     },
     footer: {
       description:
-        "Agence specialisee en vente et mise en relation d'actifs immobiliers et miniers.",
+        "Agence spécialisée en vente et mise en relation d'actifs immobiliers et miniers.",
       slogan: "Valoriser. Connecter. Conclure.",
       contact: "Contact",
       follow: "Suivez-nous",
-      rightsPrefix: "Tous droits reserves"
+      rightsPrefix: "Tous droits réservés"
     },
     contact: {
-      button: "Nous Contacter",
-      quick: "Acces rapide",
+      button: "Nous contacter",
+      quick: "Accès rapide",
       whatsapp: "WhatsApp",
       call: "Appeler",
       email: "Email",
@@ -178,7 +178,7 @@ function buildServices(currentLang, config) {
       <article class="reveal group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-soft transition duration-500 hover:-translate-y-1 hover:shadow-luxury">
         <div class="relative h-44 overflow-hidden border-b border-slate-200 bg-slate-100">
           <!-- Replace with dedicated service visual -->
-          <img src="services-image-${service.n}.jpg" alt="CKM service card visual" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+          <img src="services-image.png" alt="CKM service card visual" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
           <div class="absolute left-4 top-4 inline-flex rounded-xl border border-slate-300 bg-white/90 p-2.5">
             <i data-lucide="${service.icon}" class="h-5 w-5 text-slate-700"></i>
           </div>
@@ -336,7 +336,7 @@ function updateSchema(currentLang, config) {
     slogan: currentLang === "fr" ? config.company.slogan : "Enhance. Connect. Close.",
     description:
       currentLang === "fr"
-        ? "Agence specialisee dans la vente et la mise en relation entre actifs immobiliers, miniers et acheteurs qualifies."
+        ? "Agence spécialisée dans la vente et la mise en relation entre actifs immobiliers, miniers et acheteurs qualifiés."
         : "Agency specialized in the sale and introduction of real-estate and mining assets to qualified buyers.",
     email: config.company.email,
     telephone: config.contact.phones[0],
