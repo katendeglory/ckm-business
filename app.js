@@ -139,6 +139,75 @@ const CKM_TRANSLATIONS = {
       linkedin: "LinkedIn",
       instagram: "Instagram"
     }
+  },
+  zh: {
+    loading: "正在加载 CKM 体验",
+    nav: {
+      about: "关于我们",
+      services: "服务",
+      method: "方法",
+      contact: "联系",
+      cta: "开始洽谈"
+    },
+    hero: {
+      badge: "资产买卖与收购机构",
+      title: "增值。连接。成交。",
+      description:
+        "CKM 是一家专业机构，致力于房地产与矿业资产的销售，并将其与合格的潜在买家对接。",
+      ctaPrimary: "了解我们的服务",
+      ctaSecondary: "咨询顾问",
+      cardLabel: "全程指导",
+      cardText: "从资产评估到交易完成，提供结构化全程支持。"
+    },
+    about: {
+      eyebrow: "定位",
+      title: "战略资产与优质资本之间的可信桥梁。",
+      description:
+        "我们协助希望出售资产的业主，以及寻求可靠、切实投资机会的投资者。",
+      overlayLabel: "愿景",
+      overlayText: "将资产转化为切实的交易。"
+    },
+    services: {
+      eyebrow: "专业能力",
+      title: "专为快速、成功成交而设计的服务。",
+      description: "融合战略、优质人脉网络与交易支持的高端执行方案。",
+      cardCta: "联系我们"
+    },
+    method: {
+      eyebrow: "执行",
+      title: "从分析到成交的严谨方法。"
+    },
+    stats: {
+      eyebrow: "影响力",
+      title: "增强信任的关键指标。"
+    },
+    why: {
+      eyebrow: "CKM 优势",
+      title: "投资者与业主选择我们的理由。"
+    },
+    cta: {
+      eyebrow: "合作",
+      title: "CKM，您通往成功交易的桥梁。",
+      description: "我们的使命明确：帮助您高效出售资产，对接合适的买家。",
+      button: "立即开始"
+    },
+    footer: {
+      description: "专注于房地产与矿业资产销售及对接的专业机构。",
+      slogan: "增值。连接。成交。",
+      contact: "联系",
+      follow: "关注我们",
+      rightsPrefix: "版权所有"
+    },
+    contact: {
+      button: "联系我们",
+      quick: "快捷入口",
+      whatsapp: "WhatsApp",
+      call: "电话",
+      email: "电子邮件",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      instagram: "Instagram"
+    }
   }
 };
 
@@ -328,16 +397,14 @@ function buildFloatingContacts(currentLang, config) {
 }
 
 function updateSchema(currentLang, config) {
+  const t = CKM_TRANSLATIONS[currentLang];
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: config.company.name,
     url: config.company.website,
-    slogan: currentLang === "fr" ? config.company.slogan : "Value. Connect. Close.",
-    description:
-      currentLang === "fr"
-        ? "Agence spécialisée dans la vente et la mise en relation entre actifs immobiliers, miniers et acheteurs qualifiés."
-        : "Agency specialized in the sale and matchmaking of real estate and mining assets with qualified buyers.",
+    slogan: t.footer.slogan,
+    description: t.footer.description,
     email: config.company.email,
     telephone: config.contact.phones[0],
     address: {
