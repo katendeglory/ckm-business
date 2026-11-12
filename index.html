@@ -68,17 +68,37 @@
       }
 
       body {
-        background: radial-gradient(
-            circle at 10% 10%,
-            rgba(15, 23, 42, 0.04),
-            transparent 35%
-          ),
-          radial-gradient(
-            circle at 90% 15%,
-            rgba(15, 23, 42, 0.03),
-            transparent 45%
-          ),
-          #fff;
+        background: #efefec;
+      }
+
+      /* Live listing cards that drift gently over the hero photo. */
+      .float-a {
+        animation: drift 7s ease-in-out infinite;
+      }
+      .float-b {
+        animation: drift 8s ease-in-out -3s infinite;
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .live-dot {
+        box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.5);
+        animation: pulse 2s ease-out infinite;
+      }
+      @keyframes pulse {
+        to {
+          box-shadow: 0 0 0 8px rgba(22, 101, 52, 0);
+        }
+      }
+      .live-tab[aria-pressed="true"] {
+        background: #0f172a;
+        color: #fff;
       }
 
       .glass-panel {
@@ -181,6 +201,12 @@
           display: none;
         }
 
+        .float-a,
+        .float-b,
+        .live-dot {
+          animation: none;
+        }
+
         .contact-panel,
         .contact-panel-link {
           transition: none;
@@ -219,7 +245,7 @@
       >
         <a href="#hero" class="group inline-flex items-center gap-2">
           <span class="text-lg font-semibold tracking-[0.35em]">CKM</span>
-          <span class="h-2 w-2 rounded-full bg-slate-700 transition-transform group-hover:scale-125"></span>
+          <span class="h-2 w-2 rounded-full bg-[#a2582f] transition-transform group-hover:scale-125"></span>
         </a>
         <button
           id="mobile-menu-btn"
@@ -234,6 +260,7 @@
           <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#services" data-i18n="nav.services">Services</a>
           <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#method" data-i18n="nav.method">Méthode</a>
           <a class="nav-link text-sm font-medium text-slate-700 transition hover:text-slate-950" href="#contact" data-i18n="nav.contact">Contact</a>
+          <a class="text-sm font-medium text-slate-700 transition hover:text-slate-950" href="https://app.ckm-business.org/" data-app-path="/" data-i18n="nav.listings">Annonces</a>
           <div class="inline-flex rounded-xl border border-slate-200 p-1">
             <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="fr">FR</button>
             <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="en">EN</button>
@@ -257,6 +284,7 @@
           <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#services" data-i18n="nav.services">Services</a>
           <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#method" data-i18n="nav.method">Méthode</a>
           <a class="nav-link rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="#contact" data-i18n="nav.contact">Contact</a>
+          <a class="rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-100" href="https://app.ckm-business.org/" data-app-path="/" data-i18n="nav.listings">Annonces</a>
           <div class="inline-flex w-max rounded-xl border border-slate-200 p-1">
             <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="fr">FR</button>
             <button class="lang-btn rounded-lg px-3 py-1.5 text-xs font-semibold" data-lang="en">EN</button>
@@ -302,6 +330,14 @@
                 <span data-i18n="hero.ctaSecondary">Parler à un conseiller</span>
                 <i data-lucide="phone-call" class="h-4 w-4"></i>
               </a>
+              <a
+                href="https://app.ckm-business.org/deposer/"
+                data-app-path="/deposer/"
+                class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:border-slate-900 hover:text-slate-900"
+              >
+                <span data-i18n="hero.ctaDeposit">Déposer un bien</span>
+                <i data-lucide="plus" class="h-4 w-4"></i>
+              </a>
             </div>
           </div>
           <div class="reveal relative">
@@ -320,7 +356,37 @@
                 </p>
               </div>
             </div>
+            <!-- Filled from the listings API; stays empty when it is unreachable. -->
+            <div id="hero-live" class="pointer-events-none absolute inset-0 hidden sm:block" aria-hidden="true"></div>
           </div>
+        </div>
+      </section>
+
+      <section id="live" class="hidden px-4 pb-20 sm:px-8 lg:pb-28">
+        <div class="mx-auto w-full max-w-7xl">
+          <div class="mb-8 flex flex-wrap items-end justify-between gap-6">
+            <div class="max-w-2xl">
+              <p class="inline-flex items-center gap-2.5 text-sm font-medium text-slate-600">
+                <span class="live-dot h-2 w-2 rounded-full bg-[#166534]"></span>
+                <span id="live-count"></span>
+              </p>
+              <h2 class="mt-3 font-display text-4xl leading-tight text-slate-950 sm:text-5xl" data-i18n="live.title">En ce moment chez CKM</h2>
+              <p class="mt-4 text-base leading-relaxed text-slate-600" data-i18n="live.description">
+                Maisons et voitures vérifiées par l'agence, publiées sur l'application CKM.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <div class="inline-flex rounded-full bg-white p-1" role="group">
+                <button class="live-tab rounded-full px-4 py-2 text-sm font-semibold text-slate-700 transition" data-kind="house" aria-pressed="true" data-i18n="live.houses">Maisons</button>
+                <button class="live-tab rounded-full px-4 py-2 text-sm font-semibold text-slate-700 transition" data-kind="car" aria-pressed="false" data-i18n="live.cars">Voitures</button>
+              </div>
+              <a href="https://app.ckm-business.org/explorer/" data-app-path="/explorer/" class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800">
+                <span data-i18n="live.cta">Voir toutes les annonces</span>
+                <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+              </a>
+            </div>
+          </div>
+          <div id="live-grid" class="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3"></div>
         </div>
       </section>
 
@@ -426,13 +492,23 @@
                   Échangez avec notre équipe pour structurer la meilleure trajectoire de cession ou d'acquisition.
                 </p>
               </div>
-              <a
-                href="#contact"
-                class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
-              >
-                <span data-i18n="cta.button">Démarrer maintenant</span>
-                <i data-lucide="move-right" class="h-4 w-4"></i>
-              </a>
+              <div class="flex flex-wrap gap-3">
+                <a
+                  href="#contact"
+                  class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                >
+                  <span data-i18n="cta.button">Démarrer maintenant</span>
+                  <i data-lucide="move-right" class="h-4 w-4"></i>
+                </a>
+                <a
+                  href="https://app.ckm-business.org/deposer/"
+                  data-app-path="/deposer/"
+                  class="inline-flex items-center gap-2 rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-white"
+                >
+                  <span data-i18n="cta.deposit">Déposer un bien</span>
+                  <i data-lucide="plus" class="h-4 w-4"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>

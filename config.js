@@ -1,4 +1,13 @@
 window.CKM_CONFIG = {
+  // Listings app (a separate site). The local brochure on :8080 points to the local app on :3000.
+  appUrl: /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)
+    ? "http://localhost:3000"
+    : "https://app.ckm-business.org",
+  // Listings API, read-only: the brochure shows a few live listings from it.
+  // Leave empty to hide those blocks (set the hosted API URL once it exists).
+  apiUrl: /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)
+    ? "http://localhost:5003"
+    : "",
   company: {
     name: "CKM",
     slogan: "Valoriser. Connecter. Conclure.",

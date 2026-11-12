@@ -1,11 +1,24 @@
 const CKM_TRANSLATIONS = {
   fr: {
     loading: "Chargement de l'expérience CKM",
+    live: {
+      title: "En ce moment chez CKM",
+      description: "Maisons et voitures vérifiées par l'agence, publiées sur l'application CKM.",
+      houses: "Maisons",
+      cars: "Voitures",
+      cta: "Voir toutes les annonces",
+      count: (n) => (n === 1 ? "1 annonce en ligne" : `${n} annonces en ligne`),
+      onRequest: "Prix sur demande",
+      perMonth: "/ mois",
+      sale: "À vendre",
+      rent: "À louer"
+    },
     nav: {
       about: "À propos",
       services: "Services",
       method: "Méthode",
       contact: "Contact",
+      listings: "Annonces",
       cta: "Lancer une discussion"
     },
     hero: {
@@ -15,6 +28,7 @@ const CKM_TRANSLATIONS = {
         "CKM est une agence spécialisée dans la vente et la mise en relation entre les actifs immobiliers, miniers et les potentiels acheteurs.",
       ctaPrimary: "Découvrir nos services",
       ctaSecondary: "Parler à un conseiller",
+      ctaDeposit: "Déposer un bien",
       cardLabel: "Exécution guidée",
       cardText: "Un accompagnement structuré de l'évaluation de l'actif jusqu'à la conclusion."
     },
@@ -49,7 +63,8 @@ const CKM_TRANSLATIONS = {
       title: "CKM, votre passerelle vers des transactions réussies.",
       description:
         "Notre rôle est clair : vous aider à vendre efficacement vos actifs en les connectant aux bons acheteurs.",
-      button: "Démarrer maintenant"
+      button: "Démarrer maintenant",
+      deposit: "Déposer un bien"
     },
     footer: {
       description:
@@ -72,11 +87,24 @@ const CKM_TRANSLATIONS = {
   },
   en: {
     loading: "Loading the CKM experience",
+    live: {
+      title: "Right now at CKM",
+      description: "Houses and cars checked by the agency, published on the CKM app.",
+      houses: "Houses",
+      cars: "Cars",
+      cta: "See all listings",
+      count: (n) => (n === 1 ? "1 listing online" : `${n} listings online`),
+      onRequest: "Price on request",
+      perMonth: "/ month",
+      sale: "For sale",
+      rent: "For rent"
+    },
     nav: {
       about: "About",
       services: "Services",
       method: "Method",
       contact: "Contact",
+      listings: "Listings",
       cta: "Start a discussion"
     },
     hero: {
@@ -86,6 +114,7 @@ const CKM_TRANSLATIONS = {
         "CKM is a specialized agency in the sale and matchmaking of real estate and mining assets with qualified prospective buyers.",
       ctaPrimary: "Explore our services",
       ctaSecondary: "Speak with an advisor",
+      ctaDeposit: "List a property",
       cardLabel: "Guided execution",
       cardText: "Structured support from asset valuation through to closing."
     },
@@ -120,7 +149,8 @@ const CKM_TRANSLATIONS = {
       title: "CKM, your gateway to successful transactions.",
       description:
         "Our role is clear: help you sell your assets efficiently by connecting them with the right buyers.",
-      button: "Get started now"
+      button: "Get started now",
+      deposit: "List a property"
     },
     footer: {
       description: "Agency specialized in the sale and matchmaking of real estate and mining assets.",
@@ -142,11 +172,24 @@ const CKM_TRANSLATIONS = {
   },
   zh: {
     loading: "正在加载 CKM 体验",
+    live: {
+      title: "CKM 最新房源与车源",
+      description: "经 CKM 审核、发布在 CKM 应用上的房屋和汽车。",
+      houses: "房屋",
+      cars: "汽车",
+      cta: "查看全部信息",
+      count: (n) => `${n} 条在线信息`,
+      onRequest: "价格面议",
+      perMonth: "/ 月",
+      sale: "出售",
+      rent: "出租"
+    },
     nav: {
       about: "关于我们",
       services: "服务",
       method: "方法",
       contact: "联系",
+      listings: "房源与车辆",
       cta: "开始洽谈"
     },
     hero: {
@@ -156,6 +199,7 @@ const CKM_TRANSLATIONS = {
         "CKM 是一家专业机构，致力于房地产与矿业资产的销售，并将其与合格的潜在买家对接。",
       ctaPrimary: "了解我们的服务",
       ctaSecondary: "咨询顾问",
+      ctaDeposit: "发布房源或车辆",
       cardLabel: "全程指导",
       cardText: "从资产评估到交易完成，提供结构化全程支持。"
     },
@@ -189,7 +233,8 @@ const CKM_TRANSLATIONS = {
       eyebrow: "合作",
       title: "CKM，您通往成功交易的桥梁。",
       description: "我们的使命明确：帮助您高效出售资产，对接合适的买家。",
-      button: "立即开始"
+      button: "立即开始",
+      deposit: "发布房源或车辆"
     },
     footer: {
       description: "专注于房地产与矿业资产销售及对接的专业机构。",
@@ -644,6 +689,138 @@ function initLanguageSystem(onLanguageChange) {
   });
 }
 
+// Links to the listings app (another origin). Plain navigation in the same tab.
+function applyAppLinks(config) {
+  const base = String(config.appUrl || "").replace(/\/+$/, "");
+  if (!base) {
+    return;
+  }
+  document.querySelectorAll("[data-app-path]").forEach((link) => {
+    link.setAttribute("href", base + link.getAttribute("data-app-path"));
+  });
+}
+
+// ---------- live listings (read-only, from the listings API) ----------
+
+const LIVE = { houses: [], cars: [], total: 0, kind: "house", ready: false };
+const LOCALE_TAG = { fr: "fr-FR", en: "en-US", zh: "zh-CN" };
+
+const escapeHtml = (s) =>
+  String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+function livePrice(item, lang) {
+  const t = CKM_TRANSLATIONS[lang].live;
+  if (!item.price || !item.price.visible) return t.onRequest;
+  const amount = new Intl.NumberFormat(LOCALE_TAG[lang], {
+    style: "currency",
+    currency: item.price.currency,
+    maximumFractionDigits: 0
+  }).format(item.price.amount);
+  return item.intent === "rent" ? `${amount} ${t.perMonth}` : amount;
+}
+
+function liveFacts(item) {
+  if (item.house) {
+    const h = item.house;
+    return [
+      h.bedrooms && ["bed-double", h.bedrooms],
+      h.bathrooms && ["bath", h.bathrooms],
+      (h.surfaceM2 || h.landM2) && ["maximize-2", `${h.surfaceM2 || h.landM2} m²`]
+    ].filter(Boolean);
+  }
+  if (item.car) {
+    const c = item.car;
+    return [c.year && ["calendar", c.year], c.mileageKm != null && ["gauge", `${new Intl.NumberFormat("fr-FR").format(c.mileageKm)} km`]].filter(Boolean);
+  }
+  return [];
+}
+
+function liveHref(config, item) {
+  return `${String(config.appUrl || "").replace(/\/+$/, "")}/annonce/?code=${encodeURIComponent(item.code)}`;
+}
+
+function liveTitle(item, lang) {
+  return (item.title && (item.title[lang] || item.title.fr)) || item.code;
+}
+
+function liveWhere(item) {
+  const l = item.location || {};
+  return [l.quartier, l.city].filter(Boolean).join(", ");
+}
+
+function buildLiveListings(currentLang, config) {
+  const section = document.getElementById("live");
+  if (!LIVE.ready || !section) return;
+  const t = CKM_TRANSLATIONS[currentLang].live;
+  section.classList.remove("hidden");
+  document.getElementById("live-count").textContent = t.count(LIVE.total);
+  document.querySelectorAll(".live-tab").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.kind === LIVE.kind)));
+
+  const items = (LIVE.kind === "car" ? LIVE.cars : LIVE.houses).slice(0, 6);
+  document.getElementById("live-grid").innerHTML = items
+    .map((item) => {
+      const cover = item.cover;
+      return `
+      <a href="${liveHref(config, item)}" class="group block w-[82%] shrink-0 snap-start rounded-[1.75rem] bg-white p-2 pb-4 shadow-[0_1px_2px_rgb(15_23_42/0.04)] transition duration-300 hover:shadow-soft sm:w-auto">
+        <div class="relative aspect-[4/3] overflow-hidden rounded-[1.4rem] bg-slate-200">
+          ${cover ? `<img src="${escapeHtml(cover.cardUrl)}" alt="${escapeHtml(cover.alt || liveTitle(item, currentLang))}" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />` : ""}
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/45 to-transparent"></div>
+          <span class="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-slate-900">${escapeHtml(t[item.intent] || "")}</span>
+          <span class="absolute bottom-3 left-3 rounded-full bg-white px-3.5 py-1.5 text-[15px] font-semibold text-slate-950">${escapeHtml(livePrice(item, currentLang))}</span>
+        </div>
+        <div class="px-2.5 pt-3.5">
+          <h3 class="truncate text-[17px] font-semibold text-slate-950">${escapeHtml(liveTitle(item, currentLang))}</h3>
+          <p class="mt-1 flex items-center gap-1 text-[13px] text-slate-600"><i data-lucide="map-pin" class="h-3.5 w-3.5"></i>${escapeHtml(liveWhere(item))}</p>
+          <p class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-slate-700">${liveFacts(item)
+            .map(([icon, text]) => `<span class="inline-flex items-center gap-1.5"><i data-lucide="${icon}" class="h-3.5 w-3.5 text-slate-400"></i>${escapeHtml(text)}</span>`)
+            .join("")}</p>
+        </div>
+      </a>`;
+    })
+    .join("");
+
+  // Hero: two listings drift over the photo, each a real link target in the app.
+  const hero = document.getElementById("hero-live");
+  const pair = [LIVE.houses[0], LIVE.cars[0] || LIVE.houses[1]].filter(Boolean);
+  hero.innerHTML = pair
+    .map(
+      (item, i) => `
+      <div class="${i === 0 ? "float-a -left-6 top-10 lg:-left-14" : "float-b -right-4 bottom-44 lg:-right-10"} absolute flex w-64 items-center gap-3 rounded-2xl bg-white p-2.5 pr-4 shadow-luxury">
+        ${item.cover ? `<img src="${escapeHtml(item.cover.thumbUrl)}" alt="" class="h-14 w-14 shrink-0 rounded-xl object-cover" />` : ""}
+        <div class="min-w-0">
+          <p class="truncate text-sm font-semibold text-slate-950">${escapeHtml(liveTitle(item, currentLang))}</p>
+          <p class="truncate text-xs text-slate-500">${escapeHtml(liveWhere(item))}</p>
+          <p class="mt-0.5 text-sm font-semibold text-slate-900">${escapeHtml(livePrice(item, currentLang))}</p>
+        </div>
+      </div>`
+    )
+    .join("");
+}
+
+async function loadLiveListings(config, getLang) {
+  const api = String(config.apiUrl || "").replace(/\/+$/, "");
+  if (!api) return;
+  try {
+    const get = (q) => fetch(`${api}/api/listings?${q}`).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+    const [houses, cars] = await Promise.all([get("kind=house&limit=6"), get("kind=car&limit=6")]);
+    LIVE.houses = houses.items || [];
+    LIVE.cars = cars.items || [];
+    LIVE.total = (houses.total || 0) + (cars.total || 0);
+    LIVE.ready = LIVE.houses.length + LIVE.cars.length > 0;
+  } catch {
+    return; // API down: the brochure simply shows without live listings
+  }
+  document.querySelectorAll(".live-tab").forEach((button) => {
+    button.addEventListener("click", () => {
+      LIVE.kind = button.dataset.kind;
+      buildLiveListings(getLang(), config);
+      refreshIcons();
+    });
+  });
+  buildLiveListings(getLang(), config);
+  refreshIcons();
+}
+
 function refreshIcons() {
   if (window.lucide && typeof window.lucide.createIcons === "function") {
     window.lucide.createIcons();
@@ -658,6 +835,7 @@ function renderApp(currentLang, config) {
   buildWhyChooseUs(currentLang, config);
   buildFooter(currentLang, config);
   buildFloatingContacts(currentLang, config);
+  buildLiveListings(currentLang, config);
   updateSchema(currentLang, config);
   refreshIcons();
   initRevealObserver();
@@ -685,6 +863,8 @@ function init() {
   initFloatingContactPanel();
   initMobileMenu();
   initLoadingScreen();
+  applyAppLinks(config);
+  loadLiveListings(config, () => currentLanguage);
 }
 
 init();
