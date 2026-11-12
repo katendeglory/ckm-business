@@ -7,7 +7,7 @@ window.CKM_CONFIG = {
   // Local copy talks to the local server, the published site to the hosted API.
   apiUrl: /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)
     ? "http://localhost:5003"
-    : "https://ckm-immo.onrender.com",
+    : "https://ckm-immo-server.onrender.com",
   company: {
     name: "CKM",
     slogan: "Valoriser. Connecter. Conclure.",
