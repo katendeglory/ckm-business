@@ -4,10 +4,10 @@ window.CKM_CONFIG = {
     ? "http://localhost:3000"
     : "https://app.ckm-business.org",
   // Listings API, read-only: the brochure shows a few live listings from it.
-  // Leave empty to hide those blocks (set the hosted API URL once it exists).
+  // Local copy talks to the local server, the published site to the hosted API.
   apiUrl: /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)
     ? "http://localhost:5003"
-    : "",
+    : "https://ckm-immo.onrender.com",
   company: {
     name: "CKM",
     slogan: "Valoriser. Connecter. Conclure.",
